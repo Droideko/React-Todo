@@ -4,22 +4,19 @@ import ToDoItem from '../todo-item';
 
 class ToDoList extends Component{
    render(){
-      const data = this.props.data;
-      // console.log(data);
+      const {data, handleDelete} = this.props;
       return(
-         <div>
-            <table>
-               <tbody>       
-                  {data.map(el => 
-                     <ToDoItem 
-                        key={el.id}
-                        label={el.label}
-                        done={el.done}
-                        id={el.id}/>
-                  )}              
-               </tbody>           
-            </table>         
-         </div>
+         <table>
+            <tbody>       
+               {data.map(el => 
+                  <ToDoItem 
+                     key={el.id}
+                     label={el.label}
+                     done={el.done}
+                     handleDelete={() => handleDelete(el.id)}/>
+               )}              
+            </tbody>           
+         </table>         
       );
    }
 }

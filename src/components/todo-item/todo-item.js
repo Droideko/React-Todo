@@ -1,12 +1,17 @@
 import React from 'react';
 import './todo-item.sass'
 
-const ToDoItem = ({label, done, id}) => {
+const ToDoItem = ({label, done, handleDelete}) => {
    return(
       <tr>
-         <td>{label}</td>
+         <td
+            className='list__item'>{label}</td>
          <td>
-            <button>delete</button>         
+            <button
+               className='button__delete'
+               onClick={handleDelete}>
+                  delete
+            </button>         
          </td>
       </tr>
    );
