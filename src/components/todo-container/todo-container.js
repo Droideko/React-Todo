@@ -18,10 +18,10 @@ class ToDoContainer extends Component{
       const data = this.state.data;
 
       return(
-         <div>
-            <h1 className='class1'>Todo List</h1>   
+         <div className='container'>
+            <h1 className='container__title'>Todo List</h1>   
             <SearchPanel />
-            <ToDoList />
+            <ToDoList data={data}/>
             <ItemAddForm />
          </div>
       )
