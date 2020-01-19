@@ -4,7 +4,7 @@ import ToDoItem from '../todo-item';
 
 class ToDoList extends Component{
    render(){
-      const {data, handleDelete} = this.props;
+      const {data, handleDelete, handleImportant} = this.props;
       return(
          <table>
             <tbody>       
@@ -13,7 +13,8 @@ class ToDoList extends Component{
                      key={el.id}
                      label={el.label}
                      done={el.done}
-                     handleDelete={() => handleDelete(el.id)}/>
+                     handleDelete={() => handleDelete(el.id)}
+                     handleImportant={() => handleImportant(el.id)}/>
                )}              
             </tbody>           
          </table>         
