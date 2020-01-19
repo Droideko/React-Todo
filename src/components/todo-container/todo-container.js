@@ -10,8 +10,10 @@ class ToDoContainer extends Component{
       super(props);
       this.state = {
          data: this.props.data,
+         searchText: '',
       }
       this.handleDelete = this.handleDelete.bind(this);
+      this.handleSearch = this.handleSearch.bind(this);
 
    }
 
@@ -23,18 +25,26 @@ class ToDoContainer extends Component{
       });
    }
 
+   handleSearch(e){
+      this.setState({searchText: e.target.value});
+   }
+
+   myFilter(searchText, data){
+      return data.filter(el => el.label.toLowerCase().includes(searchText.toLowerCase()));
+   }
+
    render(){
-      const data = this.state.data;
+      const {data, searchText} = this.state;
+      const filterData = this.myFilter(searchText, data);
       return(
          <div className='container'>
             <h1 className='container__title'>Todo List</h1>   
-            <SearchPanel />
-            <ToDoList data={data} handleDelete={this.handleDelete}/>
+            <SearchPanel searchText={searchText} handleSearch={this.handleSearch}/>
+            <ToDoList data={filterData} handleDelete={this.handleDelete}/>
             <ItemAddForm />
          </div>
       )
    }
 }
-
 
 export { ToDoContainer };
