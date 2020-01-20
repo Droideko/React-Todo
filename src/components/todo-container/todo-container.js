@@ -12,9 +12,11 @@ class ToDoContainer extends Component{
          data: this.props.data,
          searchText: '',
       }
+      this.id = 10;
       this.handleDelete = this.handleDelete.bind(this);
       this.handleSearch = this.handleSearch.bind(this);
       this.handleImportant = this.handleImportant.bind(this);
+      this.handleAddItem = this.handleAddItem.bind(this);
    }
 
    handleDelete(id){
@@ -37,6 +39,17 @@ class ToDoContainer extends Component{
       });
    }
 
+   handleAddItem(text){
+      const newItem = {
+         label: text, 
+         done: false,
+         id: this.id++,
+      };
+      this.setState(({data}) => ({
+         data: [...data, newItem]
+      }))
+   }
+
    myFilter(searchText, data){
       return data.filter(el => el.label.toLowerCase().includes(searchText.toLowerCase()));
    }
@@ -44,7 +57,6 @@ class ToDoContainer extends Component{
    render(){
       const {data, searchText} = this.state;
       const filterData = this.myFilter(searchText, data);
-      console.log(data);
       return(
          <div className='container'>
             <h1 className='container__title'>Todo List</h1>   
@@ -55,7 +67,8 @@ class ToDoContainer extends Component{
                data={filterData} 
                handleDelete={this.handleDelete}
                handleImportant={this.handleImportant}/>
-            <ItemAddForm />
+            <ItemAddForm 
+               handleAddItem={this.handleAddItem}/>
          </div>
       )
    }

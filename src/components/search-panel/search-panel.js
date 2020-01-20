@@ -10,6 +10,7 @@ class SearchPanel extends Component{
             <form className='container__search-form'>
                <input 
                   className='container__search-input'
+                  placeholder='Search...'
                   value={searchText}
                   onChange={handleSearch}>
                </input>                           
