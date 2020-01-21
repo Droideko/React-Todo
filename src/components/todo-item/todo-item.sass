@@ -17,8 +17,14 @@
       box-shadow: inset 0px 0px 7px red
       color: red
 
-.list__item
-   font-size: 1.2em
-   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-   cursor: pointer
-   padding: 8px
+.list
+   &__row
+      display: grid
+      grid-template-columns: 2fr 1fr
+      justify-items: center
+      align-items: center
+   &__item
+      font-size: 1.2em
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+      cursor: pointer
+      padding: 8px

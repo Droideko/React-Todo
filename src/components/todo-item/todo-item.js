@@ -4,7 +4,7 @@ import './todo-item.sass'
 const ToDoItem = ({label, done, handleDelete, handleImportant}) => {
    const styleDone = done ? {textDecoration: `line-through`} : {textDecoration: `none`}
    return(
-      <tr>
+      <tr className='list__row'>
          <td
             className='list__item'
             onClick={handleImportant}

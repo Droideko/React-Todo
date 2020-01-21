@@ -11,12 +11,14 @@ class ToDoContainer extends Component{
       this.state = {
          data: this.props.data,
          searchText: '',
+         filter: 'all'
       }
       this.id = 10;
       this.handleDelete = this.handleDelete.bind(this);
       this.handleSearch = this.handleSearch.bind(this);
       this.handleImportant = this.handleImportant.bind(this);
       this.handleAddItem = this.handleAddItem.bind(this);
+      this.handleFilter = this.handleFilter.bind(this);
    }
 
    handleDelete(id){
@@ -50,19 +52,34 @@ class ToDoContainer extends Component{
       }))
    }
 
+   handleFilter(value){
+      this.setState({filter: value})
+   }
+
    myFilter(searchText, data){
       return data.filter(el => el.label.toLowerCase().includes(searchText.toLowerCase()));
    }
 
+   myFilterActive(data, filter){
+      switch(filter){
+         case 'all': return data;
+         case 'active': return data.filter(data => !data.done);
+         case 'done': return data.filter(data => data.done);
+         default: return data;
+      }
+   }
+
    render(){
-      const {data, searchText} = this.state;
-      const filterData = this.myFilter(searchText, data);
+      const {data, searchText, filter} = this.state;
+      const filterData = this.myFilterActive(this.myFilter(searchText, data), filter);
       return(
          <div className='container'>
             <h1 className='container__title'>Todo List</h1>   
             <SearchPanel 
                searchText={searchText} 
-               handleSearch={this.handleSearch}/>
+               handleSearch={this.handleSearch}
+               filter={this.state.filter}
+               handleFilter={this.handleFilter}/>
             <ToDoList 
                data={filterData} 
                handleDelete={this.handleDelete}
